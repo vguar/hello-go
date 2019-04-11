@@ -16,7 +16,7 @@ jobs:
           docker_layer_caching: true
 
 
-      - run: |
+      - run:
           name: Build application Docker image
           command: |
             docker build -t quay.io/vguar/hello-go:latest .
