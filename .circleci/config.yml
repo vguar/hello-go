@@ -1,26 +1,24 @@
-# Golang CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-go/ for more details
-version: 2
+---
+version: 2.1
+
 jobs:
   build:
     docker:
       # specify the version
-      - image: circleci/golang:1.9
+      - image: circleci/golang:1.11
 
     working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}
     steps:
       - checkout
-
+  
       - setup_remote_docker:
           docker_layer_caching: true
-
 
       - run:
           name: Build application Docker image
           command: |
+            docker login -u "vguar+helloworld" -p ${HELLO_TOKEN} quay.io
             docker build -t quay.io/vguar/hello-go:latest .
-            echo ${HELLO_TOKEN} | docker login -u "vguar+helloworld" --password-stdin quay.io
             docker push quay.io/vguar/hello-go:latest
                
 
