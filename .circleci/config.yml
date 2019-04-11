@@ -17,9 +17,11 @@ jobs:
 
 
       - run: |
-          docker build -t quay.io/vguar/hello-go:latest .
-          docker login -u="vguar+helloworld" -p=${HELLO_TOKEN} quay.io
-          docker push quay.io/vguar/hello-go:latest
+          name: Build application Docker image
+          command: |
+            docker build -t quay.io/vguar/hello-go:latest .
+            echo ${HELLO_TOKEN} | docker login -u "vguar+helloworld" --password-stdin quay.io
+            docker push quay.io/vguar/hello-go:latest
                
 
   #    - run:
