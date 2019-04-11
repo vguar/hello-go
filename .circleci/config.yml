@@ -17,8 +17,6 @@ jobs:
 
 
       - run: |
-          name: Install Docker client
-          command: |
           docker build -t quay.io/vguar/hello-go:latest .     
           #echo ${HELLO_TOKEN} | docker login -u "vguar+helloworld" --password-stdin quay.io
 
