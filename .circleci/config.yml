@@ -1,14 +1,21 @@
 ---
 version: 2.1
 
+executors:
+  # Whenever the Go version is updated here, .promu.yml should also be updated.
+  golang:
+    docker:
+    - image: circleci/golang:1.11
+
 jobs:
   build:
-    docker:
-      # specify the version
-      - image: circleci/golang:1.11
     
     machine: true
     working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}
+
+  docker_hub_master:
+    executor: golang
+
     steps:
       - checkout
       - setup_remote_docker:
